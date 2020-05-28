@@ -1,6 +1,8 @@
 <template>
   <div class="cc-editor">
     <div class="cc-editor-toolbar">
+     <div>
+     <div> Element :</div>
       <b-form-group>
         <b-form-radio-group
           id="btn-radios-1"
@@ -9,7 +11,11 @@
           buttons
           name="radios-btn-default"
         ></b-form-radio-group>
-      </b-form-group>
+        </b-form-group>
+     </div>
+      
+    <div>
+    <div>Mode :</div>
       <b-button-group>
         <b-button variant="success" class="mb-2" @click="action='add'">
           <b-icon icon="plus" aria-hidden="true"></b-icon>
@@ -21,14 +27,24 @@
           <b-icon icon="trash" aria-hidden="true"></b-icon>
         </b-button>
       </b-button-group>
+    </div>
+     <div>
+     <div>Graph details :</div>
       <div class="cc-editor-info">
         <b-form-input v-model="graph.name" placeholder="Enter graph name"></b-form-input>
         <b-form-input v-model="graph.description" placeholder="Enter graph description"></b-form-input>
       </div>
-      <b-button variant="primary" class="mb-2" @click="save">
+     </div>
+     <div class="cc-editor-btns" >
+      <b-button variant="danger" size="sm" class="mb-2" @click="reset">
+        Reset
+        <b-icon icon="x" aria-hidden="true"></b-icon>
+      </b-button>
+      <b-button size="sm" variant="primary" class="mb-2" @click="save">
         Save
         <b-icon icon="check" aria-hidden="true"></b-icon>
       </b-button>
+     </div>
     </div>
 
     <div class="cc-edit-area">
@@ -126,6 +142,13 @@ export default {
     addNode() {
       this.graph.nodes.push({ ...this.node });
       this.node.tooltip = "";
+    },
+    reset(){
+ this.graph= {
+        name: "",
+        description: "",
+        nodes: []
+      }
     },
     getNodeByTarget(e) {
       return this.graph.nodes.find(node => {
