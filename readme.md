@@ -18,7 +18,7 @@ navigate to :
 
 ##### setup the client side :
 
-  change directory to the front-end at the project root :
+  change directory to the `front-end` folder at the project root :
 
     cd front-end
  
