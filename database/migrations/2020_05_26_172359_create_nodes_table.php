@@ -15,10 +15,10 @@ class CreateNodesTable extends Migration
     {
         Schema::create('nodes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tooltip');
-            $table->string('color');
-            $table->integer('x');
-            $table->integer('y');
+            $table->string('tooltip')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('x')->nullable();
+            $table->integer('y')->nullable();
             $table->integer('id_graph')->unsigned();
             $table->foreign('id_graph')->references('id')->on('graphs')->onDelete('cascade');
             $table->timestamps();

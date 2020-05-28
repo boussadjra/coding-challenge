@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Node;
+use App\Models\NodeNeighbor;
 use Illuminate\Http\Request;
 
-class NodeController extends Controller
+class NodeNeighborController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class NodeController extends Controller
      */
     public function index()
     {
-        return Node::all();
-
+        //
     }
 
     /**
@@ -35,27 +35,29 @@ class NodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $r)
+    public function store(Request $request)
     {
-        return Node::create([
-            "tooltip" => $r->tooltip,
-            "x" => $r->x,
-            "y" => $r->y,
-            "color" => $r->color,
-            "id_graph" => $r->id_graph,
 
-        ]
-        );
+        $n = [];
+        foreach ($request->neighbors as $key => $neighbor) {
+            $_node = Node::where('x', '=', $neighbor['x'])->where('y', '=', $neighbor['y'])->first();
 
+            NodeNeighbor::create([
+                'id_node' => $request->node['id'],
+                'id_node_neighbor' => $_node['id'],
+            ]);
+
+        }
+        return $n;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Node  $node
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node)
+    public function show($id)
     {
         //
     }
@@ -63,25 +65,22 @@ class NodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Node  $node
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node)
+    public function edit($id)
     {
-        $node = Node::findOrFail($id);
-
-        $node->update($request->all());
-        return $node;
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Node  $node
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Node $node)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -89,12 +88,11 @@ class NodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Node  $node
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node)
+    public function destroy($id)
     {
-        $node->delete();
-        return response()->json(null, 204);
+        //
     }
 }

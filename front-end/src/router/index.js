@@ -23,7 +23,7 @@ export default new Router({
         },
         {
             path: '/add',
-            name: 'EditGraph',
+            name: 'AddGraph',
             component: EditGraph,
             props: true
         },

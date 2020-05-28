@@ -1,7 +1,7 @@
 import { API_HOST } from '../utils/constants';
 
 const GraphService ={
-	all,findById,save,update
+	all,findById,save,update,remove
 };
 
  function all() {
@@ -13,9 +13,9 @@ const GraphService ={
 
 }
 
-function save(graph){
+ function  save(graph){
  
-	return axios({ method: 'post', url: `${API_HOST}/graphs`,data:graph });
+	return  axios({ method: 'post', url: `${API_HOST}/graphs`,data:graph });
 
 }
 
@@ -25,4 +25,11 @@ function update(graph){
 
 }
 
+function remove(graph){
+console.log('--------remove graph------------')
+console.log(graph)
+console.log('--------------------')
+	return axios({ method: 'delete', url: `${API_HOST}/graphs/${graph.id}`,data:graph });
+
+}
 export default GraphService;

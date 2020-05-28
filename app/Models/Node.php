@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Node extends Model
 {
-    protected $fillable = ["tooltip","x","y","color"];
+    protected $fillable = ["tooltip","x","y","color","id_graph"];
 
     public function graph()
     {
