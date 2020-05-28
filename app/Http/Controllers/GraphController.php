@@ -84,33 +84,32 @@ class GraphController extends Controller
         $graph = Graph::findOrFail($id)->load('nodes');
 
         $graph->update($request->all());
-$reqNodes=[];
+        $reqNodes = [];
         //adding new nodes to updated graph
         foreach ($request->nodes as $key => $reqNode) {
             if (count($graph->nodes->find($reqNode)) == 0) {
                 $nodeObj = new Node($reqNode);
                 $nodeObj->id_graph = $graph->id;
                 $nodeObj->save();
-               array_push($reqNodes,$nodeObj);
-            }else{
-                array_push($reqNodes,$reqNode);
+                array_push($reqNodes, $nodeObj);
+            } else {
+                array_push($reqNodes, $reqNode);
 
             }
         }
 
         //remove nodes
         foreach ($graph->nodes as $key => $node) {
-     
-                $collection = collect($reqNodes);
-                $filtered = $collection->filter(function ($value, $key) use ($node) {
-                    return !isset($value['id'])?true: $value['id']==$node->id;
-                });
-             if( $filtered->count()==0){
+
+            $collection = collect($reqNodes);
+            $filtered = $collection->filter(function ($value, $key) use ($node) {
+                return !isset($value['id']) ? true : $value['id'] == $node->id;
+            });
+            if ($filtered->count() == 0) {
                 $nodeObj = Node::findOrFail($node->id);
                 $nodeObj->delete();
-             }
-              
-            
+            }
+
         }
 
         return $reqNodes;

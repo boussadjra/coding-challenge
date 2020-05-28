@@ -197,7 +197,7 @@ export default {
 
         this.$set(this.graph.nodes, indexEndNode, node);
       });
-      /* if(this.mode === "edit"){
+       if(this.mode === "edit"){
          GraphService.update(this.graph).then((result) => {
            this.refresh()
          }).catch((err) => {
@@ -212,7 +212,7 @@ export default {
            
          });;
 
-      }*/
+      }
     },
     refresh() {
       GraphService.findById(this.$route.params.id)
