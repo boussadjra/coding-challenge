@@ -16,6 +16,10 @@ navigate to :
 
     http://127.0.0.1:8000 
 
+Run seeder 
+
+    php artisan db:seed --class=GraphsTableSeeder
+
 ##### setup the client side :
 
   change directory to the `front-end` folder at the project root :
@@ -29,3 +33,4 @@ navigate to :
 navigate to :
 
     http://127.0.0.1:8080 
+
